@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
+header {
+  display: flex;
+  margin: 1vw;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid wheat;
+}
+header div h1 {
+  white-space: nowrap;
+}
+header div h1 .purple {
+  color: purple;
+}
+header div h1 .red {
+  color: red;
+}
+header div h1 .green {
+  color: green;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header .score-board h1{
+  border: 2px solid rgb(102, 92, 57);
+  padding: 0.5vw 3vw;
+  background-color: rgb(243, 238, 238);
+  border-radius: 10%;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.game {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game .game-instructions {
+  font-size: 1.5vw;
+  color: rgb(102, 92, 57);
+}
+
+.game .game-status .win{
+  margin-top: 0;
+  /* background-color: rgb(86, 170, 86); */
+  color: green;
+  padding: 1vw 2vw ;
+  border-radius: 1vw;
+}
+.game .target-color {
+  background-color: blue;
+  padding: 8vw;
+  margin: 1vw 0;
+  border-radius: 50%;
+
+}
+
+.game .color-options {
+  /* border: 2px solid black; */
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+  max-width: vw;
+}
+.game .color-option {
+  padding: 2vw 3vw;
+  border-radius: 10%;
+  margin: 0.5vw;
+}
+.game .red {
+  background-color: red;
+}
+.game .green {
+  background-color: green;
+}
+.game .blue {
+  background-color: blue;
+}
+.game .yellow {
+  background-color: yellow;
+}
+.game .purple {
+  background-color: purple;
+}
+.game .black {
+  background-color: black;
+}
+
+.game .reset {
+  background-color: rgb(95, 86, 53);
   color: white;
-}
+  padding: 0.1vw 2vw;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1.5vw;
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
