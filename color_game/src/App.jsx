@@ -1,16 +1,32 @@
 import './App.css';
-
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 const App = () => {
-  const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'black']
-  const randomColor = () => colors[Math.floor(Math.random() * colors.length)]
-  const [targetColor, setTargetColor] = useState(randomColor())
-  const [score, setScore] = useState(0)
-  const [gameStatus, setGameStatus] = useState('')
+  useEffect(() => {
+    Aos.init({
+      duration: 2000,
+      easing: 'ease-in-out',
+    });
+  })
+
+  //Variables
   const win = 'Yayy I won!!🎉';
   const lose = 'Wrong! Try again. ❌'
   const startOver = 'Start Over';
+  const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'black']
+
+  // UseState
+  const [animateScore, setAnimateScore] = useState(false)
+  const [alarm, setAlarm] = useState(false)
+  const [score, setScore] = useState(0)
+  const [gameStatus, setGameStatus] = useState('')
+  
+  
+  // Functions
+  const randomColor = () => colors[Math.floor(Math.random() * colors.length)]
+  const [targetColor, setTargetColor] = useState(randomColor())
 
   const handleGuess = (selectedColor) => {
     if (selectedColor === targetColor) {
@@ -24,7 +40,8 @@ const App = () => {
     }
     else {
       setGameStatus(lose)
-      setTimeout(() => {setGameStatus('')}, 1500)
+      setScore(score => Math.max(0, score - 1))
+      setTimeout(() => {setGameStatus('')}, 3000)
     }
   }
 
@@ -33,16 +50,27 @@ const App = () => {
     setGameStatus(startOver)
     setTimeout(() => {setGameStatus('')}, 1500)
   }
-
+  
+  
+  useEffect (() => {
+    if (score !== 0) {
+      setAnimateScore(true)
+      setAlarm(false)
+      const timer = setTimeout(() => {setAnimateScore(false)}, 2000);
+      return () => clearTimeout(timer)
+    } else {
+      setAlarm(true)
+    }
+  }, [score])
   return (
     <section>
       <header>
         <div>
-          <h1><span className='purple'>My</span> <span className='red'>Color</span> <span className='green'>Game</span></h1>
+          <h1 data-aos='fade-right'><span className='purple'>My</span> <span className='red'>Color</span> <span className='green'>Game</span></h1>
         </div>
 
-        <div className='score-board'>
-          <h1 data-testid='score'>{score}</h1>
+        <div data-aos='fade-left' className='score-board'>
+          <h1 className={animateScore ? 'animateScore' : alarm ? 'alarm' : ''} data-testid='score'>{score}</h1>
         </div>
       </header>
 
